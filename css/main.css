@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 900;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    z-index: 1;
+    position: absolute;
+    width: 60%;
+    padding: 10px;
+    min-width: 300px;
+    max-width: 600px;
+    border-radius: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, .9);
+    /* "delay" the visibility transition */
+    -webkit-transition: opacity .5s, visibility 0s linear .5s;
+    transition: opacity .5s, visibility 0s linear .5s;
+    box-shadow: 0 2px 55px -25px rgb(0 0 0 / 100%);
+}
+
+.popup .title{
+    border-radius: 15px 15px 0 0;
+    min-height: 40px;
+    color: #fff;
+    background-color: #222;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.popup:target {
+    visibility: visible;
+    opacity: 1;
+    /* cancel visibility transition delay */
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.popup-close {
+    position: absolute;
+    padding: 10px;
+    max-width: 500px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, .9);
+}
+
+.popup .close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    padding: 5px;
+    color: #ccc;
+    transition: color .3s;
+    font-size: 2em;
+    line-height: .6em;
+    font-weight: bold;
+}
+
+.popup .close:hover {
+    color: #fff;
+}
+
+fieldset{
+    margin-bottom: 20px;
+}
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+ul li{
+    margin: 10px;
+}
+
+/* label 텍스트 스타일 */
+li label{
+    width: 140px;
+    line-height: 36px;
+    font-weight: bold;
+}
+
+/* 텍스트 필드 스타일 */
+ input[type="text"], input[type="password"], input[type="email"]{
+ 	width : 100%;
+    height: 30px;
+} 
+
+/* 버튼 스타일 */
+#buttons{
+	width: 100%;
+    margin: 10px;
+    text-align: center;
+}
+
+
+#buttons input:hover{
+    background-color:#222;
+    color: #fff;
+    border-color: #fff;
+}
+
+/* 드롭다운 메뉴 스타일 */
+select{
+    width: 100px;
+    height: 30px;
+}
+
+/* 표만드는 테두리 */
+table{
+    border:1px solid #ccc;
+    border-collapse: collapse;
+}
+td, th{
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
