@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+	 
+	function chkIdForm(obj){
+		var content = obj.value;
+		var result = document.getElementById("idResult");
+		var cumule = "";
+		
+		if(content.search(/\W|\s/g) > -1){
+			cumule += "아이디에 공백 혹은 특수문자(한글 포함)가 올 수 없습니다.";
+		}
+
+
+		if( 4 > content.length || content.length > 12){
+			cumule += "아이디의 길이는 4 ~ 12자 사이여야 합니다.";
+		}
+	
+		
+		if(cumule =="")
+		{
+			result.innerHTML = "사용가능한 아이디 입니다."
+			result.style.color = "#008000"
+		}
+		else
+		{
+			result.innerHTML = cumule;
+			result.style.color = "#db0d36"
+			document.getElementById("id").value = null;
+		}
+	}
+	
+	
+	function chkPwdForm(obj) {
+		var content = obj.value;
+		var result = document.getElementById("pwdResult");
+		var cumule = "";
+		
+		if(content.search(/\s/g) > -1){
+			cumule += "비밀번호에 공백을 사용할 수 없습니다.";
+		}
+
+
+		var special_pattern = /[`~!@#$%^&*()_+|<>?:{}]/;
+		if(special_pattern.test(content) == false){
+			cumule += "비밀번호에 특수문자를 입력해야 합니다.";
+		}
+
+
+		if(cumule ==""){
+
+
+			result.innerHTML = "사용가능한 비밀번호 입니다."
+			result.style.color = "#008000"
+		}
+		else{
+			result.innerHTML = cumule;
+			result.style.color = "#db0d36"
+			document.getElementById("pwd").value = null;
+		}
+		
+	}
+	
+	function chkSecurity(obj){
+		var pwd = obj.value;
+		var special_pattern = /[`~!@#$%^&*()_+|<>?:{}]/; //특수문자
+		var smallLetter =  /[a-z]/;  //소문자
+		var capitalLetter = /[A-Z]/; //대문자
+		var num = /[0-9]/;	// 숫자 
+		
+		//[소문자, 대문자, 숫자, 특수기호 있나없나]를 확인하기 위한 배열
+        const stringChk = [false, false, false, false];
+		var secuM = ['매우위험','위험','보통','안전']; //보안수준을 문구로 설명하기위한 배열
+		var secuColor = ["#db0d36","#db0d36","#ffd400","#008000"]; //문구의 색상을 줌
+        var security = 0; //보안 수준을 체크하기 위한 변수
+		
+        for(var i = 0; i < pwd.length; i++){
+           	if(smallLetter.test(pwd) == true){
+           		stringChk[0] = true;
+            }
+           	if(capitalLetter.test(pwd) == true){
+           		stringChk[1] = true;
+            }
+           	if(num.test(pwd) == true){
+           		stringChk[2] = true;
+            }
+        	if(special_pattern.test(pwd) == true){
+        		stringChk[3] = true;
+            }
+        }
+
+
+        security =  stringChk.filter(element => true === element).length;
+        document.getElementById("Security_Level").value = security;
+        document.getElementById("secMessage").innerHTML = secuM[security-1];
+        document.getElementById("secMessage").style.color = secuColor[security-1];
+        
+	}
+		
+		
+	function chkPwd(e){
+		var password = document.getElementById("pwd_chk").value;
+		var result = document.getElementById("pwdchkResult");
+		var answer = document.getElementById("pwd").value;
+		
+		if(password == answer){
+			result.innerHTML = "비밀번호 확인이 완료되었습니다."
+			result.style.color = "#008000"
+		}
+		else{
+			result.innerHTML = "비밀번호가 일치하지 않습니다."
+			result.style.color = "#db0d36"
+		}
+	}
+	
+	function chkNickForm(obj){
+		var content = obj.value;
+		var result = document.getElementById("nickResult");
+		var cumule = "";
+		
+		if(content.search(/\s/g) > -1 || content ==""){
+			cumule += "닉네임에 공백을 사용할 수 없습니다.";
+		}
+		
+		if(cumule =="")
+		{
+			result.innerHTML = "사용가능한 닉네임 입니다."
+			result.style.color = "#008000"
+		}
+		else
+		{
+			result.innerHTML = cumule;
+			result.style.color = "#db0d36"
+			document.getElementById("nickResult").value = null;
+		}
+
+
+	}
+	
+	</script>
+    <header>
+    	<h1>&nbsp;<a href="join.jsp"> 회원가입 </a></h1>
+    </header><hr>
+	<section class="popup">
+        <form onsubmit="alert('회원가입 완료!!');">
+            <fieldset>
+            	<legend>회원 정보 입력</legend>
+                <ul>
+                	<li>
+                		<label for="nickname"> 닉네임 </label>
+                		<input type="text" id="nickname" autofocus placeholder="공백 불가능"  onblur="chkNickForm(this)" required/>
+                		<p id = "nickResult"></p>
+                	</li>
+                    <li>
+                        <label for="pwd"> 비밀번호 </label>
+                        <input type="password" id="pwd" placeholder="공백없이 특수문자 포함"  onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)" required/>
+                        <p id = "pwdResult"></p>
+                        <br>
+                        <span style="margin-left : 120px;">보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p>
+                    	
+                    </li>
+                    <li>
+                        <label for="pwd_chk"> 비밀번호 확인 </label>
+                        <input type="password" id="pwd_chk"  onkeyup="chkPwd(event)" required/>
+                    	<p id = "pwdchkResult"></p>
+                    </li>
+                    <li>
+                        <label for="mail"> 이메일 </label>
+                        <input type="email" id="mail" required>
+                    </li>
+                    <li>
+                        <label for="mobile"> 전화번호 </label>
+                        <select name="phone" style = "width:70px; height:30px;">
+                            <option value="LG U+">LG U+</option>
+                            <option value="SK">SK</option>
+                            <option value="KT">KT</option>
+                        </select>
+                        <input type="tel" id= "su_phone" required>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>이메일 수신 동의</legend>
+                <input type="radio" name="mailing" id="mailing_y" checked>
+                <label for="mailing_y">메일 수신 동의</label>
+                <input type="radio" name="mailing" id="mailing_n" >
+                <label for="mailing_n">메일 수신 동의하지 않음</label>
+            </fieldset>
+        
+        <input type="submit" value="회원가입" id="buttons">
+        <a href="home.jsp"><input type="button" value="돌아가기" id="buttons"> </a>
+        </form>
+	</section>   
+</body>
+</html>
