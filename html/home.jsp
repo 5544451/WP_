@@ -42,7 +42,7 @@
   <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="/css/style2.css">
 
-  <!--네이버 지도 api-->
+  <!--카카오 지도 api-->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aaf6aeb8548101614cfb4d94eec89d1e"></script>
   
   <title>ECO Travel</title>
@@ -57,10 +57,8 @@
         <div class="brand-name">ECO Travel</div>
       </div>
       <div class="account-container">
-        <!--로그인 클릭 시 로그인 창 팝업-->
-        <div class="account-login"><a href="/js/login.html">로그인</a></div>
-        <!--회원가입 클릭 시 회원가입 창 팝업-->
-        <div class="account-join"><a href="/js/join.html">회원가입</a></div>
+          <!-- 로그인, 회원가입 부분 따로 추가하는 부분 -->
+	        <jsp:include page="account.jsp" flush="false" />
       </div>
     </div>
   </header>
