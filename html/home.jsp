@@ -62,124 +62,49 @@
       </div>
     </div>
   </header>
-  
-  <!--사이드 바-->
-  <aside>
-    <div class="side-container">
-      <div class="search-bar">
-        <form>
-          <input type="text" name="word" placeholder="검색">
-          <button class="btn-search"></button>
-        </form>
-      </div>
-      <div class="side-title">추천 장소</div>
-      <ul class="list-container">
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-        <li class="place-card">
-          <div class="place-title-container">
-            <div class="place-name">제주대대대대대대대대대대대대대대학교</div>
-            <div class="place-view-container">
-              <i class="fa-solid fa-eye view-icon"></i>
-              <div class="place-view">1224312</div>
-            </div>
-          </div>
-          <div class="place-desc">제주 아라동 어쩌구 저쩌구</div>
-        </li>
-      </ul>
+
+<!--카테고리 버튼-->
+	
+<div class="destination-container">
+    <div class="destination-bar">
+      <button class="destination-box"><a href="http://localhost:8080/mainpage.jsp?table=vegan">
+        <i class="fa-solid fa-salad  destination-icon restaurant-style"></i>
+        <div class="destination-name">채식 식당</div>
+      </button></a>
+      <button class="destination-box"><a href="http://localhost:8080/mainpage.jsp?table=vegan">
+        <i class="fa-solid fa-cherries destination-icon cafe-style"></i>
+        <div class="destination-name">채식 카페</div>
+      </button></a>
+      <button class="destination-box"><a href="http://localhost:8080/mainpage.jsp?table=bike">
+        <i class="fa-solid fa-bicycle destination-icon bicycle-style"></i>
+        <div class="destination-name">자전거 대여소</div>
+      </button></a>
+      <button class="destination-box"><a href="http://localhost:8080/mainpage.jsp?table=tourist_destination">
+        <i class="fa-solid fa-mountains destination-icon hotel-style"></i>
+        <div class="destination-name">관광지</div>
+      </button></a>
     </div>
-  </aside>
+  </div>   
+	
+  <!--사이드 바-->
+<div class="side-container">
+	<div class="search-bar">
+		<input id="address" type="text" placeholder="검색할 주소">
+	<button class="search-button" id="submit" ></button>
+	</div>
+
+	<!--추천장소-->	
+	<div class="list-title">추천 목적지</div>
+	<ul class="place-list">
+	<!-- 추천장소 부분 따로 추가하는 부분 -->
+	<jsp:include page="recommend.jsp" flush="true" />
+	</ul>
+</div>
 
   <!--지도 전체화면-->
-  <section>
-    <div id="map" class="map"></div>
-    
-    <script>
-      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-       mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-      };
-      var map = new kakao.maps.Map(mapContainer, mapOption); 
-    </script>
+  <section  id="map" class="map">
+   	<!-- 지도 부분 따로 추가하는 부분 -->
+ 		<jsp:include page="search.jsp" flush="false" />
   </section>
 
 
