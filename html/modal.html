@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic&family=Noto+Sans+KR:wght@300;700&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+    <title>저탄소 여행 길잡이</title>
+    <script src="https://kit.fontawesome.com/bb81250f29.js" crossorigin="anonymous"></script>
+    <style>
+      .carbon-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .carbon-modal.show {
+        display: block;
+      }
+
+      .carbon-modal-body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 350px;
+        height: 450px;
+
+        padding: 30px;
+
+        text-align: center;
+
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carbon-trees-body {
+        width: 95%;
+        height: 50%;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.6rem;
+      }
+
+      .one-tree {
+        font-size: 6rem;
+        color: green;
+        padding: 0.5rem;
+      }
+
+      .tree-style {
+        font-size: 3rem;
+        color: green;
+        padding: 0.5rem;
+      }
+
+      .carbon-message-body {
+        width: 95%;
+        height: 40%;
+        background-color: #EFF5EF;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Nanum Gothic', sans-serif;
+        line-height: 40px;
+        padding: 20px;
+        font-size: 1.2rem;
+      }
+
+      .message-carbon {
+        font-weight: bold;
+        font-size: 1.8rem;
+        font-family: 'Black Han Sans', sans-serif;
+        padding: 0.6rem;
+      }
+
+      .carbon-kakaoshare {
+        width: 95%;
+        height: 10%;
+        font-size: 0.8rem;
+        font-family: 'Nanum Gothic', sans-serif;
+        margin: 1.2rem;
+        margin-bottom: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carbon-kakaoshare img {
+        margin-left: 0.7rem;
+        font-size: 0.7rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!--모달창 배경이 될 부분-->
+    <section class="carbon-modal">
+      <!--모달창-->
+      <article class="carbon-modal-body">
+        <!--나무 아이콘 나타내는 부분-->
+        <article class="carbon-trees-body">
+          <article id="trees-line-one"></article>
+          <article id="trees-line-two"></article>
+          <article id="trees-line-three"></article>
+        </article>
+        <!--절약한 탄소량 문구 나타내는 부분-->
+        <article class="carbon-message-body">
+          <article>오늘 절약한 탄소량  <span class="message-carbon" id="carbon-kg"></span></article>
+          <article>= 소나무<span class="message-carbon" id="trees"></span>가<br>1년 간 흡수하는 탄소량</article>
+        </article>
+        <!--카카오톡 공유 문구 나타내는 부분-->
+        <article class="carbon-kakaoshare">
+          오늘 일정 공유 <img src="/kakaotalk_sharing_btn_small.png">
+        </article>
+      </article>
+    </section>
+    <button class="btn-open-popup">완료</button>
+    
+    <script>
+      const body = document.querySelector('carbon-modal-body');
+      const modal = document.querySelector('.carbon-modal');
+      const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+      // 모달창 켜질 때
+      btnOpenPopup.addEventListener('click', () => {
+        modal.classList.toggle('show');
+
+        if (modal.classList.contains('show')) {
+          body.style.overflow = 'hidden';
+        }
+      });
+
+      // 모달창 꺼질 때
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.classList.toggle('show');
+
+          if (!modal.classList.contains('show')) {
+            body.style.overflow = 'auto';
+          }
+        }
+      });
+
+      // 실제로는 숫자값에 '탄소 계산 함수 리턴값'이 들어감
+      const totalCarbon = "93.7"+"kg";
+      // 실제로는 tree에 'parseInt(totalCarbon)/(소나무흡수량)'이 들어감.
+      var tree = 4;
+      const treeSentence = tree+"그루";
+
+      // 나무 보여주는 구조
+      //   *      trees-line-one에 1개
+      //  ***     trees-line-two에 최대 3개
+      // *****    trees-line-three에 최대 5개
+      if(tree>=1 && tree <4) {
+        for(i=0; i<tree; i++) {
+          document.getElementById("trees-line-one").innerHTML += '<i class="fa fa-duotone fa-tree one-tree"></i>';
+        }
+        document.getElementById("trees-line-two").style="display=none";
+        document.getElementById("trees-line-three").style="display=none";
+      }
+      else if(tree>=4 && tree<7) {
+        document.getElementById("trees-line-one").innerHTML = '<i class="fa fa-duotone fa-tree tree-style"></i>';
+        for(i=1; i<tree; i++)
+          document.getElementById("trees-line-two").innerHTML += '<i class="fa fa-duotone fa-tree tree-style"></i>';
+        document.getElementById("trees-line-three").style="display=none";
+      }
+      else if(tree>=7 && tree<10) {
+        document.getElementById("trees-line-one").innerHTML = '<i class="fa fa-duotone fa-tree tree-style"></i>';
+        for(i=1; i<4; i++)
+          document.getElementById("trees-line-two").innerHTML += '<i class="fa fa-duotone fa-tree tree-style"></i>';
+        for(i=4; i<tree; i++)
+          document.getElementById("trees-line-three").innerHTML += '<i class="fa fa-duotone fa-tree tree-style"></i>';
+      }
+      else if(tree>=10) {
+        document.getElementById("trees-line-one").innerHTML = '<i class="fa fa-duotone fa-tree tree-style"></i>';
+        document.getElementById("trees-line-two").innerHTML = '<i class="fa fa-duotone fa-tree tree-style"></i><i class="fa fa-solid fa-ellipsis tree-style"></i><i class="fa fa-duotone fa-tree tree-style"></i>';
+        for(i=0; i<5; i++)
+          document.getElementById("trees-line-three").innerHTML += '<i class="fa fa-duotone fa-tree tree-style"></i>';
+      }
+      // tree가 1보다 작게 나오는 경우
+      else {
+        document.getElementById("trees-line-one").innerHTML = '<i class="fa fa-duotone fa-tree tree-style"></i>';
+      }
+      
+      document.getElementById("carbon-kg").innerHTML = totalCarbon;
+      document.getElementById("trees").innerHTML = treeSentence;
+    </script>
+  </body>
+</html>
