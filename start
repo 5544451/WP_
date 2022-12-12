@@ -14,3 +14,8 @@ MySQl 스키마 이름 : eco
         - 닉네임 : nickname
         - 비밀번호 : pswd
         
+      여행 일정 테이블 : journey
+        - 이메일 : email ( PrimaryKEY )  / 카카오톡인경우 회원 id값을 가져와서 적용시킴 (카카오톡은 회원정보 테이블 필요없음)
+        - 기본 여정1 : plan1
+        
+        이상태에서 누군가가 새로운 여정을 추가하면 sql column을 하나씩 추가함 (null값 가능한 text문)
