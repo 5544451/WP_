@@ -3,8 +3,8 @@
 <%@page import="java.io.PrintWriter" %>
 
 <%
-	System.out.println("session.getParameter(kakaoN) :"  + request.getParameter("kakaoN"));
-	System.out.println("request.getAttribute(id) : "+ request.getAttribute("id"));
+	System.out.println("session.getParameter(kakaoN) :"  + session.getAttribute("kakaoN"));
+	System.out.println("request.getAttribute(id) : "+ session.getAttribute("comN"));
 %>  
 
 
@@ -17,43 +17,52 @@
 
 	<script>
     // content, cate, index를 인수로 받아 form 태그로 전송하는 함수
-    function loginkakao(id) {
+    function loginkakao(kakaonickname, id) {
       // name이 paging인 태그
       var f = document.paging;
       // form 태그의 하위 태그 값 매개 변수로 대입
-      f.kakaoN.value = id;
+      f.kakaoN.value = kakaonickname;
+      f.kakaoID.value = id;
+      f.action="login_ajax.jsp"
+      f.method="post"
      // input태그의 값들을 전송하는 주소
-      f.action = "/kakaolog";
-     // 전송 방식 : post
-      f.method = "post";
       f.submit();
     };
-    </script>
 
     <!-- 카카오 로그인 -->
-	<script type="text/javascript">
 		
-		Kakao.init('aaf6aeb8548101614cfb4d94eec89d1e'); //발급받은 키 중 javascript키를 사용해준다.
-		console.log(Kakao.isInitialized()); // sdk초기화여부판단
-		//카카오로그인
-		function loginWithKakao() {
-		    Kakao.Auth.login({
-		      success: function (response) {
-		        Kakao.API.request({
-		        	url: '/v2/user/me',
-		        	success: function (response) {
- 							var kakaonickname = response.properties.nickname;    //카카오톡 닉네임을 변수에 저장 (닉네임 값을 다른페이지로 넘겨 출력하기 위해서)
- 							loginkakao(kakaonickname);
-		        	},			
-		            fail: function (error) {console.log(error);}
-		        });},
-		      fail: function (error) { console.log(error) }
-		    })}
+	Kakao.init('aaf6aeb8548101614cfb4d94eec89d1e'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	//카카오로그인
+	function loginWithKakao() {
+		//로그인시도
+	    Kakao.Auth.login({
+	      	success: function (response) {
+	      	// 성공시 API 호출
+	        Kakao.API.request({
+	        	url: '/v2/user/me',
+	        	success: function (response) {
+	        		console.log(response);
+	        		var kakaonickname = response.properties.nickname;    //카카오톡 닉네임을 변수에 저장 (닉네임 값을 다른페이지로 넘겨 출력하기 위해서)
+					console.log('kakaonickname = ' + kakaonickname);
+	        		var id = response.id;
+	        		loginkakao(kakaonickname, id);
+
+	        	},			
+	            fail: function (error) {console.log(error);}
+	        });},
+	      fail: function (error) { console.log(error) }
+	    })}
+	
+	function logOut() {
+		session.invalidate();
+	}
 	</script>
 </head>
 <body> 
 	<form name="paging">
-    	<input type="hidden" name="kakaoN"/></form> 
+    	<input type="hidden" name="kakaoN"/>
+    	<input type="hidden" name="kakaoID"/></form> 
     <%  
        if( session.getAttribute("kakaoN") == null && session.getAttribute("comN") == null) {%>
        		<ul>
@@ -61,18 +70,18 @@
                 <li style="display: inline-block;"><a href="#login" id="buttons"><p>로그인</p></a></li>   
            	</ul>
        <% } else if(session.getAttribute("kakaoN") == null){ %>     		
-       			<li style="display: inline-block;"><p><%= session.getAttribute("comN") %> 님</p> &nbsp &nbsp &nbsp
-       			<li style="display: inline-block;"><a href="logout_s.jsp" id="buttons"><p>로그아웃</p></a></li>
+       			<li style="display: inline-block;"><p><%= session.getAttribute("comN") %>님  &nbsp &nbsp &nbsp</p>
+       			<li style="display: inline-block;"><p onclick="logOut()">로그아웃</p></li>
        <%	} else{%>
-       			<li style="display: inline-block;"><p><%= session.getAttribute("kakaoN")%>님</p> &nbsp &nbsp &nbsp
-       			<li style="display: inline-block;"><a href="logout_s.jsp" id="buttons"><p>로그아웃</p></a></li>
+       			<li style="display: inline-block;"><p><%= session.getAttribute("kakaoN")%>님 &nbsp &nbsp &nbsp </p> 
+       			<li style="display: inline-block;"><p onclick="logOut()">로그아웃</p></li>
        <% 	} %> 
 
 <!-- 요기부터 로그인 팝업창 -->
  <div id="login" class="overlay">
      <div class="popup"> <div class="title"> <p> 로그인 </p> </div>
      <fieldset>
-          <form action="mainpage" method="post">
+          <form action="login_ajax.jsp" method="post">
                <ul>
                    <li>
                        <label for="user-id"> 아이디 </label>
