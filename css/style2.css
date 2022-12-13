@@ -253,6 +253,19 @@ form {
   font-size: 1rem;
   margin: 0.8rem;
 }
+.btn-store{
+  text-align: center;
+  font-size: 1rem;
+  margin: 0.8rem;
+  width:100%
+}
+
+/*선택 제목*/
+.select-title {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0.8rem;
+}
 
 /*장소 목록 컨테이너*/
 .list-container {
@@ -263,7 +276,10 @@ form {
   padding: 0;
   margin: 0;
   overflow: hidden; 
-  overflow-y: auto;
+  overflow-y: scroll;
+}
+.list-container::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 .plist-container {
   display: flex;
@@ -273,6 +289,11 @@ form {
   padding: 0;
   margin: 0;
   overflow: hidden; 
+  overflow-y: scroll;
+  height: 500px;
+}
+.plist-container::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 /*장소 카드*/
 .place-card {
@@ -346,7 +367,7 @@ form {
   position: fixed;
   top: 80px;
   z-index: 100;
-  width: 500px;
+  width: 510px;
   height: 50px;
 }
 
@@ -423,8 +444,8 @@ form {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-color: #fff;
   z-index: 100;
   transition: .3s ease;
+  
 }
