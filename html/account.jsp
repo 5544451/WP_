@@ -5,6 +5,8 @@
 <%
 	System.out.println("session.getParameter(kakaoN) :"  + session.getAttribute("kakaoN"));
 	System.out.println("request.getAttribute(id) : "+ session.getAttribute("comN"));
+
+	String logID = "";
 %>  
 
 
@@ -54,29 +56,90 @@
 	      fail: function (error) { console.log(error) }
 	    })}
 	
-	function logOut() {
-		session.invalidate();
-	}
+		function logOut() {
+			console.log("logout()");
+			location.replace('login_ajax.jsp');
+		}
 	</script>
+	<style type="text/css">
+		.dropbtn {
+		  color: #3f464d;
+		  width : 200px;
+		  height : 55px;
+		  font-size: 20px;
+		  border: none;
+		  font-weight: bold;
+		}
+	
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
+		}
+		 
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  min-width: 160px;
+		  z-index: 1;
+		}
+		 
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+		 
+		.dropdown-content a:hover {background-color: #ddd;}
+		 
+		.dropdown:hover .dropdown-content {display: block;}
+		 
+	</style>
+	
 </head>
 <body> 
 	<form name="paging">
     	<input type="hidden" name="kakaoN"/>
     	<input type="hidden" name="kakaoID"/></form> 
-    <%  
-       if( session.getAttribute("kakaoN") == null && session.getAttribute("comN") == null) {%>
-       		<ul>
-                <li style="display: inline-block;"><a href="signup.jsp" id="buttons"><p>회원가입</p></a></li> &nbsp &nbsp &nbsp
-                <li style="display: inline-block;"><a href="#login" id="buttons"><p>로그인</p></a></li>   
-           	</ul>
-       <% } else if(session.getAttribute("kakaoN") == null){ %>     		
-       			<li style="display: inline-block;"><p><%= session.getAttribute("comN") %>님  &nbsp &nbsp &nbsp</p>
-       			<li style="display: inline-block;"><p onclick="logOut()">로그아웃</p></li>
-       <%	} else{%>
-       			<li style="display: inline-block;"><p><%= session.getAttribute("kakaoN")%>님 &nbsp &nbsp &nbsp </p> 
-       			<li style="display: inline-block;"><p onclick="logOut()">로그아웃</p></li>
-       <% 	} %> 
 
+    <%
+	
+	if(session.getAttribute("kakaoN") != null)
+	{
+		logID = session.getAttribute("kakaoN").toString();
+	}
+
+	if(session.getAttribute("comN") != null)
+	{
+		logID = session.getAttribute("comN").toString();
+	}
+    
+    if( logID == "") {%>
+       	<ul>
+            <li style = "display : inline-block;"><a href="join.html" id="buttons"><p>회원가입</p></a></li>
+            <li style = "display : inline-block;"><a href="#login" id="buttons"><p>로그인</p></a></li> 
+       	</ul>
+   <% }else{ %>    
+       <article class = "dropdown">	
+   			<button class = "dropbtn"><p><%= logID%>님</p></button>
+  			<article class="dropdown-content">
+				<a href="#">
+ 					<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+  					마이페이지
+  				</a>
+  				<a href="#">
+  					<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+  					설정
+  				</a>
+  				<a href="#" onclick = "logOut()">
+  					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+  					로그아웃
+  				</a>
+  			</article>
+       </article>
+   		<% }%>
+
+           	
 <!-- 요기부터 로그인 팝업창 -->
  <div id="login" class="overlay">
      <div class="popup"> <div class="title"> <p> 로그인 </p> </div>
@@ -98,7 +161,7 @@
                    <a href="" class="close">&times;</a>
                </div>
             </form>
-            <div style="font-size: 15px; text-align : center;"><p>아이디가 없으신가요? <a href="signup.jsp">&nbsp 회원가입</a></p></div> 
+            <div style="font-size: 15px; text-align : center;"><p>아이디가 없으신가요? <a href="join.html">&nbsp 회원가입</a></p></div> 
                <br><p style="font-size : 13px"> SNS 계정으로 로그인</p><hr>
                <ul style="text-align: center;" class="sns">  
              		<li onlick="kakaoLogin()" style="display: inline-block;"><!-- 카카오 -->
