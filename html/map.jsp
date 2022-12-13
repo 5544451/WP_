@@ -44,7 +44,7 @@
 
   <!--카카오 지도 api-->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aaf6aeb8548101614cfb4d94eec89d1e&libraries=services,clusterer,drawing"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <title>ECO Travel</title>
 </head>
 <body>
@@ -87,7 +87,7 @@
     </ul>
   </article>
 
-
+	
   <article class="destination-container">
     <article class="destination-bar">
       <button class="destination-box">
@@ -109,14 +109,21 @@
     </article>
   </article>
   
-<article class="placelist-container">
-    <article class="side-title">오늘의 일정</article>
-    <ul class="plist-container">
-	</ul>
- </article>
-
+	<article class="placelist-container">
+		<article>
+        	<input type="text" name="daterange" value="12/10/2022 - 12/20/2022" />
+    	</article>
+    	<article class="side-title">오늘의 일정</article>
+    	<ul class="plist-container"></ul>
+    	<button class="btn-store">일정 저장</button>
+ 	</article>
+ 	
+	<section  id="map" class="map">
+   		<!-- 지도 부분 따로 추가하는 부분 -->
+ 		<jsp:include page="search.jsp" flush="false" />		
+  	</section>
   <!--지도 전체화면-->
-  <section>
+  <!-- <section>
     <article id="map" class="map"></article>
     <script>
     const placeList = document.querySelector('.plist-container'); // 선택한 장소 리스트 컨테이너
@@ -157,8 +164,8 @@
             // LatLngBounds 객체에 좌표를 추가합니다
             var bounds = new kakao.maps.LatLngBounds();
             for (var i=0; i<data.length; i++) {
-                displayMarker(data[i]);    
-                displaySearch(data[i]);
+                displayMarker(data[i]);    //마커 찍기
+                displaySearch(data[i]);//장소 검색
                 bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
                 
             }       
@@ -167,13 +174,13 @@
             map.setBounds(bounds);
         } 
     }
-    function removeSearch(){
+    function removeSearch(){ // 검색 장소 초기화
     	let divEls = document.querySelectorAll('body > article.side-container > ul >li');
     	  for (let i = 0; i < divEls.length; i++) {
     	    divEls[i].remove();
     	  }
     }
-	function displaySearch(place){
+	function displaySearch(place){ // 검색한 장소 오른쪽(선택한 장소 리스트) 컨테이너에 추가
 		const liEl = document.createElement('li');
     	liEl.setAttribute('class', 'place-card');
     	
@@ -378,7 +385,7 @@
         
     }
     </script>
-  </section>
+  </section> -->
 
 </body>
 </html>
