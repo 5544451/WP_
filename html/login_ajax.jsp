@@ -4,9 +4,14 @@
     
 <%
 	request.setCharacterEncoding("UTF-8");
-	
-	
 	System.out.println("ajax 호출");
+	
+	if(session.getAttribute("kakaoN") != null || session.getAttribute("comN") != null)
+	{
+		session.invalidate();
+		System.out.println("로그아웃");
+	}
+	
 	if(request.getParameter("kakaoN") != null){
 		session.setAttribute("kakaoN", request.getParameter("kakaoN"));
 		session.setAttribute("kakaoID",request.getParameter("kakaoID"));
@@ -36,10 +41,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
-
 </body>
 </html>
 <% 	response.sendRedirect("home.jsp"); %>
