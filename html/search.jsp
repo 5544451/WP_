@@ -30,6 +30,7 @@
     let markerArray = new Array(); // 선택한 장소 마커 담는 배열
     let Searchmarker = new Array(); // 검색한 장소 마커 담는 배열
     
+    
     var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다 
     var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
     var positions = [];// 마커를 표시할 위치와 title 객체 배열입니다. 선택한 장소 리스트 배열.
@@ -39,7 +40,6 @@
     // 키워드로 장소를 검색합니다
     ps.keywordSearch(search, placesSearchCB); 
     
-
     // 키워드 검색 완료 시 호출되는 콜백함수 입니다
     function placesSearchCB (data, status, pagination) {
     	removeSearch();
@@ -113,7 +113,6 @@
     // 지도에 마커를 표시하는 함수입니다
     function displayMarker(place) {
         // 마커를 생성하고 지도에 표시합니다
-        
         let marker = new kakao.maps.Marker({
             map: map,
             position: new kakao.maps.LatLng(place.y, place.x) 
@@ -216,34 +215,35 @@
              var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
              // 마커 이미지의 이미지 주소입니다
              
-             var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-          	 
-             for(let i=0;i<markerArray.length;i++)
+          
+             for(let i=0;i<markerArray.length;i++) //마커 초기화
             	 markerArray[i].setMap(null);
              
-             markerArray = new Array();
-             for (var i = 0; i < positions.length; i++) { //선택한 장소 리스트에 저장되어있는 장소 마커 찍기. 
-                 // 마커 이미지의 이미지 크기 입니다
-                 var imageSize = new daum.maps.Size(24, 35);
-          
-                 // 마커 이미지를 생성합니다    
-                 var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
-          
-                 // 마커를 생성합니다
-                 markerArray.push(new daum.maps.Marker({
-                     map : map, // 마커를 표시할 지도
-                     position : positions[i].latlng, // 마커를 표시할 위치
+             markerArray = new Array(); // 다시 배열 생성
+             for (var i = 0; i < positions.length; i++) { //선택한 장소 리스트에 저장되어있는 장소 마커 찍기.     
+                 var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+                 imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+                 imgOptions =  {
+                     spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+                     spriteOrigin : new kakao.maps.Point(0, (i*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+                     offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+                 },
+                 markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+                     marker = new kakao.maps.Marker({
+                     position: positions[i].latlng, // 마커의 위치
                      title : positions[i].title,
-                     image : markerImage
-                 // 마커 이미지 
-                 }));
+                     image: markerImage 
+                 });
+                 
+                 marker.setMap(map);
+                 markerArray.push(marker);
+                 // 마커 이미지를 생성합니다    
              }
         }
         function LineDraw(){
-        	var linePath;
-            var lineLine = new daum.maps.Polyline();
-            var distance;
-           	
+        	var linePath; // 두 점 사이 경로
+            var lineLine = new daum.maps.Polyline(); // 그리는 점선
+            let distance=0; // 선택한 여행 경로 총 거리
          	for(let i=0;i<sample.length;i++){
             	sample[i].setMap(null); 
          	} // sample 배열에 있던 값 싹 다 초기화.
@@ -263,11 +263,11 @@
                     strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
                     strokeStyle : 'dashed' // 선의 스타일입니다
                 }));
-                distance = Math.round(lineLine.getLength());
-                displayCircleDot(positions[i].latlng, distance);
-                 
+                distance += Math.round(lineLine.getLength());
+                //displayCircleDot(positions[i].latlng, distance); 거리 지도에 표시     
             }
-            console.log("DD"+sample.length);
+         	console.log("총 거리");
+         	console.log(distance);
             
         }
         function delWork(e) { // 클릭한 장소 삭제
