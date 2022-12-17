@@ -21,6 +21,11 @@
     const body = document.querySelector('.carbon-modal-body');
     const modal = document.querySelector('.carbon-modal');
     var datecombo = document.getElementById('datepick'); //날짜  콤보박스
+    const vefoodBtn = document.getElementById('veget-food'); //채식 식당 버튼
+    const vecafeBtn = document.getElementById('veget-cafe'); //채식 카페 버튼
+    const bicreserBtn = document.getElementById('bic-reserve'); //자전거 대여소
+    const tourist = document.getElementById('tourist'); //관광지 버튼
+    
     let currentDate = null;
     let DATA= {
     	//날짜별 placelist 목록, 배열의 인덱스가 선택한 날짜이다.
@@ -572,16 +577,17 @@
       	   let upLi = upParentLi.firstChild;
       	  upLi = upLi.firstChild;
       	  let upnode = upLi.innerHTML.toString();
-      	  console.log("ㅜㅜ");
+      	
       	  console.log(upnode);
       	  console.log(positions.length);
+      	  if(positions[0].place_name===upnode){
+      	  	alert("첫번째 일정입니다.");
+      	     return;
+          }
       	  removeTravel(); // 경로 카드 삭제
           removeMarker(); // 마커 삭제
           // 경로 객체 순서 변경
-          if(positions[0].place_name===upnode){
-        	  alert("첫번째 일정입니다.");
-        	  return;
-          }
+          
           for(let i = 0; i < positions.length; i++){ 
       		  search = positions[i].place_name.toString();
       		  if (search === upnode) {
@@ -599,26 +605,36 @@
       	  } 
       }
         function downWork(e) { // 클릭한 장소 아래로 내리기
-      	  e.preventDefault();
-      	  let delParentLi = e.target.parentNode;
-      	   let deleteLi = delParentLi.firstChild;
-      	  deleteLi = deleteLi.firstChild;
-      	  let deletenode = deleteLi.innerHTML.toString();
-      	  console.log(deleteLi.innerHTML);
-      	  placeList.removeChild(delParentLi);
-      	  
-      	  let search;
-      	  for(var i = 0; i < positions.length; i++){ 
-      		  search = positions[i].place_name.toString();
-      		  if (search === deletenode) { 
-      		    positions.splice(i, 1); 
-      		    i--; 
-      		  }
-      		} // position 객체에서 선택한 장소(삭제할 장소) 삭.제
-      	  removeSearch();
-          removeMarker();
-      	  LineDraw(); // 라인 다시 그리기
-      	  markerDraw(); // 마커 다시 그리기
+        	e.preventDefault();
+        	  let upParentLi = e.target.parentNode;
+        	   let upLi = upParentLi.firstChild;
+        	  upLi = upLi.firstChild;
+        	  let upnode = upLi.innerHTML.toString();
+        	  
+        	  console.log(upnode);
+        	  console.log(positions.length);
+        	  if(positions[positions.length-1].place_name===upnode){
+              	  alert("마지막 일정입니다.");
+              	  return;
+                }
+        	  removeTravel(); // 경로 카드 삭제
+              removeMarker(); // 마커 삭제
+              // 경로 객체 순서 변경
+            for(let i = 0; i < positions.length; i++){ 
+        		  search = positions[i].place_name.toString();
+        		  if (search === upnode) {
+        			
+        			let tmp = positions[i];
+        			positions[i]=positions[i+1];
+        			positions[i+1]=tmp;
+        		    // 앞 장소와  위치 변경
+        		  }
+        	  } 
+            
+            // 경로 카드 다시 추가
+            for(let i = 0; i < positions.length; i++){ 
+        		  listUpdate(positions[i]);
+        	  } 
       	  
       }
       function displayCircleDot(position, distance) {
