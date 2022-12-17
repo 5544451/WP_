@@ -1,0 +1,105 @@
+@charset "UTF-8";
+.carbon-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        visibility:hidden;
+
+        background-color: rgba(0, 0, 0, 0.4);
+ 		z-index: 1000;
+      }
+
+      .carbon-modal.show {
+        
+      }
+
+      .carbon-modal-body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 350px;
+        height: 450px;
+
+        padding: 30px;
+
+        text-align: center;
+
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carbon-trees-body {
+        width: 95%;
+        height: 50%;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.6rem;
+      }
+
+      .one-tree {
+        font-size: 6rem;
+        color: green;
+        padding: 0.5rem;
+      }
+
+      .tree-style {
+        font-size: 3rem;
+        color: green;
+        padding: 0.5rem;
+      }
+
+      .carbon-message-body {
+        width: 95%;
+        height: 40%;
+        background-color: #EFF5EF;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Nanum Gothic', sans-serif;
+        line-height: 40px;
+        padding: 20px;
+        font-size: 1.2rem;
+      }
+
+      .message-carbon {
+        font-weight: bold;
+        font-size: 1.8rem;
+        font-family: 'Black Han Sans', sans-serif;
+        padding: 0.6rem;
+      }
+
+      .carbon-kakaoshare {
+        width: 95%;
+        height: 10%;
+        font-size: 0.8rem;
+        font-family: 'Nanum Gothic', sans-serif;
+        margin: 1.2rem;
+        margin-bottom: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carbon-kakaoshare img {
+        margin-left: 0.7rem;
+        font-size: 0.7rem;
+      }
