@@ -24,3 +24,5 @@ MySQl 스키마 이름 : eco
     sample : 선택한 장소 직선 담는 배열
     markerArray : 선택장 장소 마커 담는 배열
     Searchmarker : 검색한 장소 마커 담는 배열
+
+    positions : 내 일정 배열
