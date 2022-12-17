@@ -20,6 +20,20 @@ MySQl 스키마 이름 : eco
         
         이상태에서 누군가가 새로운 여정을 추가하면 sql column을 하나씩 추가함 (null값 가능한 text문)
 
+session 변수이름
+	    ID : session.setAttribute("ID", mem.get(0)); 
+        - 카카오톡은 아이디로 숫자배열, 일반은 이메일값
+			Nickname : session.setAttribute("Nickname", mem.get(1));
+        - 카카오톡은 이름, 일반은 닉네임
+			bookmark : session.setAttribute("bookmark",mem.get(3));
+       - 찜해놓은 장소내용
+			cumulative : session.setAttribute("cumulative",mem.get(4));
+       - 총 그 뭐냐 어쩌고 탄소량 마이페이지에서 써서 저장함ㄴ
+      travelRoute : session.setAttribute("travelRoute",travelRoute);
+       - 로그인하면 생기는 여행일정 List<Array>형태
+       - 개인일정들 다 묶어서 나와서 따로떼주는 절차 필요함
+       
+
 지도 변수이름
     sample : 선택한 장소 직선 담는 배열
     markerArray : 선택장 장소 마커 담는 배열
