@@ -13,7 +13,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
+	<link href="style2.css" rel="stylesheet" type="text/css">
+	<script src="https://kit.fontawesome.com/bb81250f29.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 
@@ -62,37 +63,7 @@
 		}
 	</script>
 	<style type="text/css">
-		.dropbtn {
-		  color: #3f464d;
-		  width : 200px;
-		  height : 55px;
-		  font-size: 20px;
-		  border: none;
-		  font-weight: bold;
-		}
-	
-		.dropdown {
-		  position: relative;
-		  display: inline-block;
-		}
-		 
-		.dropdown-content {
-		  display: none;
-		  position: absolute;
-		  min-width: 160px;
-		  z-index: 1;
-		}
-		 
-		.dropdown-content a {
-		  color: black;
-		  padding: 12px 16px;
-		  text-decoration: none;
-		  display: block;
-		}
-		 
-		.dropdown-content a:hover {background-color: #ddd;}
-		 
-		.dropdown:hover .dropdown-content {display: block;}
+		
 		 
 	</style>
 	
@@ -139,38 +110,32 @@
        </article>
    		<% }%>
 
-           	
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <!-- 요기부터 로그인 팝업창 -->
- <div id="login" class="overlay">
-     <div class="popup"> <div class="title"> <p> 로그인 </p> </div>
-     <fieldset>
-          <form action="login_ajax.jsp" method="post">
-               <ul>
-                   <li>
-                       <label for="user-id"> 아이디 </label>
-                       <input type="text" name="user-id" autofocus placeholder="아이디 입력" required/>
-                   </li>
-                   <li>
-                       <label for="user-pwd"> 비밀번호 </label>
-                       <input type="password" name="user-pwd" placeholder="비밀번호 입력" required/>
-                   </li>
-               </ul>  
-               <br>
-               <div id="buttons">
-                   <input type="submit" value="로그인"/>
-                   <a href="" class="close">&times;</a>
-               </div>
-            </form>
-            <div style="font-size: 15px; text-align : center;"><p>아이디가 없으신가요? <a href="join.html">&nbsp 회원가입</a></p></div> 
-               <br><p style="font-size : 13px"> SNS 계정으로 로그인</p><hr>
-               <ul style="text-align: center;" class="sns">  
-             		<li onlick="kakaoLogin()" style="display: inline-block;"><!-- 카카오 -->
-               		<a onclick="javascript:loginWithKakao()">
-                   	<img src="/img/kakao_login_large.png" alt="카카오 로그인 버튼"/></a>
-				</li>
-			 </ul>
-           </fieldset>
-      </div> 
-</div> 
+<!--팝업창 배경-->
+ <article id="login" class="overlay">
+		<!--팝업창-->
+		<article class="popup">
+			<!--'로그인' 타이틀-->
+			<p class="title">로그인</p>
+			<!--아이디 비밀번호 입력, 로그인 버튼-->
+			<form action="login_ajax.jsp" method="post" style="width: 100%;">
+				<i class="fa-solid fa-user id-icon"></i>
+				<input type="text" name="user-id" class="input-id" autofocus placeholder="아이디" required/>
+				<i class="fa-solid fa-lock pwd-icon"></i>
+				<input type="password" name="user-pwd" class="input-pwd" placeholder="비밀번호" required/>
+				<input type="submit" value="로그인"/>
+			</form>
+			<!--회원가입으로 이동-->
+			<p class="to-join">아이디가 없으신가요?<a href="join.html" class="move-to-join">회원가입</a></p>
+			<!--카카오 로그인으로 이동-->
+			<p class="to-sns-login">SNS 계정으로 로그인</p>
+			<a onclick="javascript:loginWithKakao()"><img src="kakao_login_large.png" class="kakao-login" alt="카카오 로그인 버튼"/></a> 	
+		</article> 
+	</article>
+<!--팝업창 끗-->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
 </body>
 </html>
