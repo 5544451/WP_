@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.lowCO2.web.tourAPI" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "java.util.List" %>
+
+<%
+	tourAPI tour = new tourAPI();
+	List<String> TourList = new ArrayList<>();
+
+	if( TourList.isEmpty() )
+	{
+		TourList = tour.InitAPI();
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +39,9 @@
     const bicreserBtn = document.getElementById('bic-reserve'); //자전거 대여소
     const tourist = document.getElementById('tourist'); //관광지 버튼
     
+    let tourData = <%= TourList %>;
+    console.log('tourData : ' +tourData[0]);    
+	    
     let currentDate = null;
     let DATA= {
     	//날짜별 placelist 목록, 배열의 인덱스가 선택한 날짜이다.
