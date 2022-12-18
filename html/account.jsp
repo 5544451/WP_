@@ -3,8 +3,7 @@
 <%@page import="java.io.PrintWriter" %>
 
 <%
-	System.out.println("session.getParameter(kakaoN) :"  + session.getAttribute("kakaoN"));
-	System.out.println("request.getAttribute(id) : "+ session.getAttribute("comN"));
+	System.out.println("session.getParameter(kakaoN) :"  + session.getAttribute("Nickname"));
 
 	String logID = "";
 %>  
@@ -13,10 +12,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<link href="style2.css" rel="stylesheet" type="text/css">
-	<script src="https://kit.fontawesome.com/bb81250f29.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
+	<link href="/css/style2.css" rel="stylesheet" type="text/css">
+		<script src="https://kit.fontawesome.com/bb81250f29.js" crossorigin="anonymous"></script>
+	  <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 
 	<script>
     // content, cate, index를 인수로 받아 form 태그로 전송하는 함수
@@ -63,8 +61,38 @@
 		}
 	</script>
 	<style type="text/css">
-		
+/*  	 	.dropbtn {
+		  color: #3f464d;
+		  width : 200px;
+		  height : 55px;
+		  font-size: 20px;
+		  border: none;
+		  font-weight: bold;
+		}
+	
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
+		}
 		 
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  min-width: 160px;
+		  z-index: 1;
+		}
+		 
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+		 
+		.dropdown-content a:hover {background-color: #ddd;}
+		 
+		.dropdown:hover .dropdown-content {display: block;} 
+		   */
 	</style>
 	
 </head>
@@ -75,15 +103,11 @@
 
     <%
 	
-	if(session.getAttribute("kakaoN") != null)
+	if(session.getAttribute("Nickname") != null)
 	{
-		logID = session.getAttribute("kakaoN").toString();
+		logID = session.getAttribute("Nickname").toString();
 	}
 
-	if(session.getAttribute("comN") != null)
-	{
-		logID = session.getAttribute("comN").toString();
-	}
     
     if( logID == "") {%>
        	<ul>
@@ -94,13 +118,9 @@
        <article class = "dropdown">	
    			<button class = "dropbtn"><p><%= logID%>님</p></button>
   			<article class="dropdown-content">
-				<a href="#">
+				<a href="MyPage.jsp">
  					<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
   					마이페이지
-  				</a>
-  				<a href="#">
-  					<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-  					설정
   				</a>
   				<a href="#" onclick = "logOut()">
   					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -110,7 +130,7 @@
        </article>
    		<% }%>
 
-
+  
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <!-- 요기부터 로그인 팝업창 -->
 <!--팝업창 배경-->
@@ -127,15 +147,17 @@
 				<input type="password" name="user-pwd" class="input-pwd" placeholder="비밀번호" required/>
 				<input type="submit" value="로그인"/>
 			</form>
+			<a href="" class="close">&times;</a>
 			<!--회원가입으로 이동-->
 			<p class="to-join">아이디가 없으신가요?<a href="join.html" class="move-to-join">회원가입</a></p>
 			<!--카카오 로그인으로 이동-->
 			<p class="to-sns-login">SNS 계정으로 로그인</p>
-			<a onclick="javascript:loginWithKakao()"><img src="kakao_login_large.png" class="kakao-login" alt="카카오 로그인 버튼"/></a> 	
+			<a onclick="javascript:loginWithKakao()"><img src="/img/kakao_login_large.png" class="kakao-login" alt="카카오 로그인 버튼"/></a> 	
 		</article> 
 	</article>
 <!--팝업창 끗-->
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
 
 </body>
 </html>
