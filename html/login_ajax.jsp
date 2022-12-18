@@ -73,10 +73,12 @@
 		{
 			session.setAttribute("ID", mem.get(0));
 			session.setAttribute("Nickname", mem.get(1));
+			session.setAttribute("password",mem.get(2));
 			session.setAttribute("bookmark",mem.get(3));
 			session.setAttribute("cumulative",mem.get(4));
 			
 			travelRoute = DBcon.selectJorney(id);
+			session.setAttribute("travelRoute",travelRoute);
 			System.out.println("ajax travelRoute + " + travelRoute);
 
 		}
