@@ -41,6 +41,7 @@ public class addJourney extends HttpServlet{
 			System.out.println("userJourney.get(i) : " + userJourney.get(i));
 			if( userJourney.get(i) == "null" || userJourney.get(i).isEmpty())
 			{
+				userJourney.set(i, newJourney);
 				contentCol = "plan" + (i);
 				break;
 			}
@@ -54,6 +55,9 @@ public class addJourney extends HttpServlet{
 		
 		System.out.println("contentCol : " + contentCol);
 		DBcon.updateJourney(id, contentCol, newJourney);
+
+		session.setAttribute("travelRoute",userJourney);
+		System.out.println("update travelRoute : " + userJourney);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
 		dispatcher.forward(req, response); 
 		
