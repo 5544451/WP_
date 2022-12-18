@@ -106,10 +106,10 @@
 	}
     
     if( logID == "") {%>
-       	<ul class="account-container" style="list-style: none;">
-    		<li><a href="join.html" id="buttons" class="account-join">회원가입</a></li>
-    		<li onclick="login();" class="account-login">로그인</li>
-    	</ul>
+       	<ul>
+            <li style = "display : inline-block;"><a href="join.html" id="buttons"><p>회원가입</p></a></li>
+            <li style = "display : inline-block;"><a href="#login" id="buttons"><p>로그인</p></a></li> 
+       	</ul>
    <% }else{ %>    
        <article class = "dropdown">	
    			<button class = "dropbtn"><p><%= logID%>님</p></button>
