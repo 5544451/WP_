@@ -8,7 +8,6 @@ body {
   margin: 0 auto;
   color: #3f464d;
   font-family: "Spoqa Han Sans Neo", "Sans-serif", "Font Awesome 5 Free";
-
 }
 
 body, html {height: 100%;}
@@ -75,14 +74,25 @@ header {
 }
 
 .eco-style {
-  color: #1E400F;
+  color: #81a081;
 }
 
-.brand-name {
-  color: #3B7312;
+.eco-style-join {
+	color: #81a081;
+	font-weight: bold;
+	font-size: 2.8rem;
+	margin-left:0;
+	margin-right: 1.2rem;
+	margin-bottom: 0.8rem;
+	text-align: center;
+}
+
+.brand-name, .brand-name a {
+  color: #81a081;
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 
 .account-container {
   display: flex;
@@ -379,28 +389,6 @@ form {
   text-overflow: ellipsis;
 }
 
-/*뷰 아이콘과 숫자를 감싸는 컨테이너*/
-.place-view-container {
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/*뷰 아이콘*/
-.view-icon {
-  font-weight: bold;
-  font-family: "Font Awesome 5 Free";
-  background-color : transparent;
-  border : none;
-  font-size: 0.5rem;
-}
-
-/*장소 뷰*/
-.place-view {
-  font-size: 0.6rem;
-}
-
 .place-desc {
   font-size: 0.8rem;
   padding: 0.3rem 0.5rem;
@@ -647,29 +635,19 @@ form {
 
 .popup-close {
     position: absolute;
-    padding: 10px;
-    max-width: 500px;
-    border-radius: 10px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, .9);
-}
-
-.popup .close {
-    position: absolute;
     right: 15px;
     top: 15px;
     padding: 5px;
-    color: #ccc;
+    color: #81a081;
     transition: color .3s;
-    font-size: 2em;
+    font-size: 1.7rem;
     line-height: .6em;
     font-weight: bold;
 }
 
-.popup .close:hover {
+.popup-close:hover {
     color: #fff;
+    cursor:pointer;
 }
 
 /* 텍스트 필드 스타일 */
@@ -830,37 +808,197 @@ td, th{
     padding: 10px;
 }
 
-.dropbtn {
-  color: #3f464d;
-  width : 200px;
-  height : 55px;
-  font-size: 20px;
-  border: none;
-  font-weight: bold;
+.dropdown {
+	background-color: white;
+	width: 250px;
+	margin-right: -1.2rem;
+	text-align: center;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+.dropbtn {
+  background-color:white;
+  color: #81a081;
+  width : 100%;
+  height : 100%;
+  font-size: 1rem;
+  border: none;
+  font-weight: bold;
+  text-align:center;
+}
+
+
+.dropdown:hover {
+	cursor: pointer;
 }
  
 .dropdown-content {
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  z-index: 1;
+	display: none;
+	position: absolute;
+	width: 250px;
+	z-index: 1;
+	color: white;
+	font-size: 1rem;
+	background-color: white;
 }
  
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+	color: #81a081;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	background-color: white;
 }
  
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+	cursor:pointer;
+}
  
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+
+.mypage-container {
+	width:100%;
+	top:100px;
+	display:flex;
+	justify-content:center;
+}
+
+.col, .row {
+	width:80%;
+}
+
+
+.tab-content {
+	width:100%;
+}
+
+#info {
+	width:100%;
+}
+
+#nickname {
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin-left: 1rem;
+}
+
+#newNickname {
+	width: 50%;
+	height: 50px;
+	border: 0.1px solid #81a081;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 1.2rem;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	margin: 0.5rem 0;
+}
+
+fieldset button {
+	width:100px;
+	text-align: center;
+	font-size: 1rem;
+	margin-top: 1.4rem;
+	margin-bottom: 1.8rem;
+	margin-left:6rem;
+	height: 40px;
+	color: white;
+	background-color: #81a081;
+	border-radius: 15px;
+	border: none;
+	float: center;
+	
+}
+
+.mypage-carbon {
+	margin-top: 6rem;
+}
+
+.mypage-carbon span {
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+fieldset input[type="password"] {
+	width: 50%;
+	height: 50px;
+	border: 0.1px solid #81a081;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 1.2rem;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	margin: 0.5rem 0;
+}
+
+#pwd_chk {
+	margin-bottom: 0;
+}
+
+#pwd_chk ~ button {
+	margin-top: 0.8rem;
+}
+
+#pwdResult ~ #Security_Level {
+	width: 50%;
+	height: 40px;
+	color: #81a081;
+}
+
+#record {
+	width:100%;
+}
+
+.mypage-bookmark-card {
+	
+}
+
+.mypage-plan-card {
+	
+}
+
+#Withdrawal {
+	width:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.withdrawal-fieldset {
+	width:100%;
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+	justify-content:center;
+	padding-top: 0;
+}
+
+.out-checkbox {
+	margin-top: 1rem;
+	text-align:center;
+}
+
+.exclamation-style {
+	margin: 0.5rem 1rem;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.check-style {
+	margin-right: 0.6rem;
+}
 
 .carbon-modal {
    position: absolute;
@@ -874,10 +1012,6 @@ td, th{
    
    background-color: rgba(0, 0, 0, 0.4);
    z-index: 1000;
-}
-
-.carbon-modal.show {
-  
 }
 
 .carbon-modal-body {
