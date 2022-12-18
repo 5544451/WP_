@@ -18,7 +18,7 @@ public class DBControll {
 	    
 	    public DBControll() {
 	    	USERNAME = "root";
-	    	PASSWORD = "root";
+	    	PASSWORD = "";
 	    	URL = "jdbc:mysql://localhost:3306/eco";
 	    }
 	    
@@ -39,42 +39,16 @@ public class DBControll {
 	        }
 	    }
 	    
-	    public void addColumn() {
+	    public void addColumn(int columnCount) {
 	    	//2. 다음 Column생성
-	    	int columnCount = 0;
-	    	String sql = String.format("select * from journey");
 	    	connect();
-	    	PreparedStatement pstmt = null;
-	    	System.out.print(sql);
-	    	try {
-	    		pstmt = conn.prepareStatement(sql);
-	    		ResultSet rs = pstmt.executeQuery();
-	    		ResultSetMetaData rsmd = rs.getMetaData();
-	    		columnCount = rsmd.getColumnCount(); 
-	    		int result = pstmt.executeUpdate();
-	    		if(result == 1) {
-	    			pstmt.close();
-	    		}
-	        } catch (Exception e) {
-	            System.out.println("addColumn 메서드 예외발생" + e);
-	        }    finally {
-	            try {
-	                if(pstmt!=null && !pstmt.isClosed()) {
-	                    pstmt.close();
-	                }
-	            } catch (Exception e2) {}
-	        }
-	    	
 	    	String newCol = "plan"+ Integer.toString(columnCount);
-	    	String oldCol = "plan"+ Integer.toString(columnCount-1);
-	    	pstmt = null;
-	    	sql = String.format("TABLE journey ADD COLUMN ? TEXT NULL AFTER ?");
+	    	PreparedStatement pstmt = null;
+	    	String sql = String.format("ALTER TABLE journey ADD COLUMN %s TEXT NULL", newCol);
 	    	try {
 	    		pstmt = conn.prepareStatement(sql);
-	    		pstmt.setString(1, newCol);
-	    		pstmt.setString(2, oldCol);
-	            int result = pstmt.executeUpdate();
-	            if(result == 1) {
+				/* pstmt.setString(1, newCol); */
+	            if(pstmt.execute()) {
 	                System.out.println("TABLE journey ADD COLUMN success!");
 	                conn.close();
 	            } 
