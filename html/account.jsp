@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<link href="/css/style2.css" rel="stylesheet" type="text/css">
+	<link href="style2.css" rel="stylesheet" type="text/css">
 		<script src="https://kit.fontawesome.com/bb81250f29.js" crossorigin="anonymous"></script>
 	  <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 
@@ -57,40 +57,6 @@
 			location.replace('login_ajax.jsp');
 		}
 	</script>
-	<style type="text/css">
-/*  	 	.dropbtn {
-		  color: #3f464d;
-		  width : 200px;
-		  height : 55px;
-		  font-size: 20px;
-		  border: none;
-		  font-weight: bold;
-		}
-	
-		.dropdown {
-		  position: relative;
-		  display: inline-block;
-		}
-		 
-		.dropdown-content {
-		  display: none;
-		  position: absolute;
-		  min-width: 160px;
-		  z-index: 1;
-		}
-		 
-		.dropdown-content a {
-		  color: black;
-		  padding: 12px 16px;
-		  text-decoration: none;
-		  display: block;
-		}
-		 
-		.dropdown-content a:hover {background-color: #ddd;}
-		 
-		.dropdown:hover .dropdown-content {display: block;} 
-		   */
-	</style>
 	
 </head>
 <body> 
@@ -106,10 +72,10 @@
 	}
     
     if( logID == "") {%>
-       	<ul>
-            <li style = "display : inline-block;"><a href="join.html" id="buttons"><p>회원가입</p></a></li>
-            <li style = "display : inline-block;"><a href="#login" id="buttons"><p>로그인</p></a></li> 
-       	</ul>
+    	<ul class="account-container" style="list-style: none;">
+    		<li><a href="join.html" id="buttons" class="account-join">회원가입</a></li>
+    		<li><a href="#login" id="buttons" class="account-login">로그인</a></li>
+    	</ul>
    <% }else{ %>    
        <article class = "dropdown">	
    			<button class = "dropbtn"><p><%= logID%>님</p></button>
@@ -143,7 +109,7 @@
 				<input type="password" name="user-pwd" class="input-pwd" placeholder="비밀번호" required/>
 				<input type="submit" value="로그인"/>
 			</form>
-			<a href="" class="close" onclick="close();">&times;</a>
+			<a href="" class="popup-close" onclick="close();">&times;</a>
 			<!--회원가입으로 이동-->
 			<p class="to-join">아이디가 없으신가요?<a href="join.html" class="move-to-join">회원가입</a></p>
 			<!--카카오 로그인으로 이동-->
