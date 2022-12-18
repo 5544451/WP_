@@ -48,7 +48,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
- 	 <link rel="stylesheet" href="style2.css">
+ 	 <link rel="stylesheet" href="/css/style2.css">
 	<script src="https://kit.fontawesome.com/f1def33959.js" crossorigin="anonymous"></script>
 	<link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -125,8 +125,24 @@
 			result.style.color = "#db0d36"
 		}
 	}
+	
+	function editMember(){
+		var nickname = document.getElementById("newNickname").value;
+		var password = document.getElementById("pwd").value;
+		
+        var f = document.editform;
+        f.editNickname.value = nickname;
+        f.editPswd.value = password;
+        f.action = "MypageEdit" 
+        f.method = "post"
+        f.submit();
+		
+	}
 	</script>
-
+	<form name = "editform">
+		<input type = "hidden" id = "editNickname" name = "editNickname"/>
+		<input type = "hidden" id = "editPswd" name = "editPswd"/>
+	</form>
 	<header>
 	   <article class="head-container">
 	     <!--헤드 브랜드 클릭 시 새로고침-->
@@ -141,7 +157,7 @@
 	   </article>
 	</header>
 	<section class="mypage-container">
-      <article class="row" style="width=100%">
+      <article class="row">
         <article class="col">
             <ul class="nav nav-tabs">
               <li class="nav-item">
@@ -180,7 +196,7 @@
 						<label style = "width :180px">새로운 비밀번호 확인</label>
 						<input type = "password" id="pwd_chk" name="pwd_chk" placeholder ="공백없이 특수문자 포함" onkeyup="chkPwd(event)"/><br>
 						
-						<button value = "변경하기" onclick="editPWD()">변경하기</button>
+						<button value = "변경하기" onclick = "editNickname()">변경하기</button>
 					</fieldset>
 	            </article>
 	            <article class="tab-pane fade" id="record" style = "padding : 30px;">
@@ -203,7 +219,7 @@
 	            </article>
 	            <article class="tab-pane fade" id="Withdrawal">
 	                <fieldset style = "padding : 20px;	width: 60%;" class="withdrawal-fieldset">
-	                	<img src = "저탄소여행.png" style = "width : 300px; padding : 30px; display: flex;"/>
+	                	<img src = "/img/저탄소여행.png" style = "width : 300px; padding : 30px; display: flex;"/>
 	                	<h2><i class="fa-solid fa-triangle-exclamation exclamation-style"></i>회원 탈퇴 전 확인해주세요 </h2>
 	                	<p>탈퇴하시면 이용 중인 모든 데이터가 폐쇄되며, 모든 데이터는 복구가 불가능합니다.</p>
 	                	
