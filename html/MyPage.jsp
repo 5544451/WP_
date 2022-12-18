@@ -4,15 +4,43 @@
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.List" %>
 
-
 <%
+	DBControll DBcon = new DBControll();
+
 	String nickname = String.valueOf(session.getAttribute("Nickname"));
 	Float culmulativeCarbon = 0f;
 	
 	if( session.getAttribute("cumulative") == ""){
 		culmulativeCarbon = Float.valueOf(String.valueOf(session.getAttribute("cumulative")));
 	}
+	
 	ArrayList<String> travelRoute = (ArrayList) session.getAttribute("travelRoute");	
+	String[] dateArray = new String[travelRoute.size() -1];
+	
+	for( int p=1; p<travelRoute.size(); p++)
+	{
+		if(travelRoute.get(p) == null){break;}
+		String[] arr1 = travelRoute.get(p).split("@");
+		for( int i=1; i<arr1.length; i++)
+		{
+			System.out.println("arr1["+i+"] : " +arr1[i]);
+			String[] row1 = arr1[i].split("/");
+			for( int j=0; j<(arr1.length); j++)
+			{
+//				System.out.println("arr1["+i+"] : row1["+ j +"]  //// " +row1[j]);
+				if( i == 1 && j == 0)
+				{
+					dateArray[p-1] = row1[j];
+				}
+				if( i == (arr1.length-1) && j == 0)
+				{
+					dateArray[p-1] += " ~ " + row1[0];
+				}
+			}
+		}
+		System.out.println("dateArray[]"+ (p-1) +"] = " + dateArray[p-1]);
+	}
+	
 	//날짜 비교하기
 %>
 <!DOCTYPE html>
@@ -20,9 +48,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
-	<!--CSS Reset(1), 아이콘 폰트, 웹페이지 사용 폰트, style.css-->
-	
-	<link rel="stylesheet" href="/css/main.css">
 	<script src="https://kit.fontawesome.com/f1def33959.js" crossorigin="anonymous"></script>
 	<link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="/css/style2.css">
@@ -32,17 +57,89 @@
 			padding : 30px;
 		}
 		 p { margin:20px 0px; }
-		 
 	</style>
-
 </head>
 <body>
+	<script>
+	function chkPwdForm(obj) {
+		var content = obj.value;
+		var result = document.getElementById("pwdResult");
+		var cumule = "";
+		
+		if(content.search(/\s/g) > -1){
+			cumule += "비밀번호에 공백을 사용할 수 없습니다.";}
+
+		var special_pattern = /[`~!@#$%^&*()_+|<>?:{}]/;
+		if(special_pattern.test(content) == false){
+			cumule += "비밀번호에 특수문자를 입력해야 합니다.";}
+		if(cumule ==""){
+			result.innerHTML = "사용가능한 비밀번호 입니다."
+			result.style.color = "#008000"
+		}
+		else{
+			result.innerHTML = cumule;
+			result.style.color = "#db0d36"
+			document.getElementById("pwd").value = null;
+		}
+	}
+	
+	function chkSecurity(obj){
+		var pwd = obj.value;
+		var special_pattern = /[`~!@#$%^&*()_+|<>?:{}]/; //특수문자
+		var smallLetter =  /[a-z]/;  //소문자
+		var capitalLetter = /[A-Z]/; //대문자
+		var num = /[0-9]/;	// 숫자 
+		
+		//[소문자, 대문자, 숫자, 특수기호 있나없나]를 확인하기 위한 배열
+        const stringChk = [false, false, false, false];
+		var secuM = ['매우위험','위험','보통','안전']; //보안수준을 문구로 설명하기위한 배열
+		var secuColor = ["#db0d36","#db0d36","#ffd400","#008000"]; //문구의 색상을 줌
+        var security = 0; //보안 수준을 체크하기 위한 변수
+		
+        for(var i = 0; i < pwd.length; i++){
+           	if(smallLetter.test(pwd) == true){
+           		stringChk[0] = true;
+            }
+           	if(capitalLetter.test(pwd) == true){
+           		stringChk[1] = true;
+            }
+           	if(num.test(pwd) == true){
+           		stringChk[2] = true;
+            }
+        	if(special_pattern.test(pwd) == true){
+        		stringChk[3] = true;
+            }
+        }
+        security =  stringChk.filter(element => true === element).length;
+        document.getElementById("Security_Level").value = security;
+        document.getElementById("secMessage").innerHTML = secuM[security-1];
+        document.getElementById("secMessage").style.color = secuColor[security-1];
+        
+	}
+		
+		
+	function chkPwd(e){
+		var password = document.getElementById("pwd_chk").value;
+		var result = document.getElementById("pwdchkResult");
+		var answer = document.getElementById("pwd").value;
+		
+		if(password == answer){
+			result.innerHTML = "비밀번호 확인이 완료되었습니다."
+			result.style.color = "#008000"
+		}
+		else{
+			result.innerHTML = "비밀번호가 일치하지 않습니다."
+			result.style.color = "#db0d36"
+		}
+	}
+	</script>
+
 	<header>
 	   <article class="head-container">
 	     <!--헤드 브랜드 클릭 시 새로고침-->
 	     <article class="brand-container">
 	       <i class="fa-solid fa-leaf brand-icon eco-style"></i>
-	       <article class="brand-name">ECO Travel</article>
+	       <article class="brand-name"><a href="home.jsp">ECO Travel</a></article>
 	     </article>
 	     <article class="account-container">
 	         <!-- 로그인, 회원가입 부분 따로 추가하는 부분 -->
@@ -69,15 +166,24 @@
 					<fieldset style="width : 50%; float:left;">
 						<p>닉네임</p>
 						<h4> <%= nickname %></h4>
-						<button style="float : right;" value = "수정하기">수정하기</button>
+						<label style = "width :180px">새로운 닉네임</label><input type="text"  id="newNikname" >
+						<button style="float : right;" value = "수정하기" onclick = "editNickname()">수정하기</button>
 					</fieldset>
 					<fieldset style="width : 50%; ">
 						<p>비밀번호 변경</p>
-						<label style = "width :150px">현재 비밀번호</label>
+						
+						<label style = "width :180px">현재 비밀번호</label>
 						<input type = "password" placeholder ="현재 비밀번호 입력"/>
-						<label style = "width :150px">새로운 비밀번호</label>
-						<input type = "password" placeholder ="공백없이 특수문자 포함"/>
-						<button style="float : right;" value = "수정하기">수정하기</button>
+						
+						<label style = "width :180px">새로운 비밀번호</label>
+						<input type = "password" id="pwd" name="pwd" placeholder ="공백없이 특수문자 포함" onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)"/>
+						<p id = "pwdResult"></p>
+						<span>보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p><span id = "pwdchkResult"></span>
+						
+						<label style = "width :180px">새로운 비밀번호 확인</label>
+						<input type = "password" id="pwd_chk" name="pwd_chk" placeholder ="공백없이 특수문자 포함" onkeyup="chkPwd(event)"/><br>
+						
+						<button style="float : right;" value = "변경하기" onclick="editPWD()">변경하기</button>
 					</fieldset>
 					<fieldset>
 						<label>탄소 발자국</label>
@@ -95,9 +201,10 @@
 	                <fieldset style = "padding : 40px;">
 	                <h4>계획한 여행지</h4>
 	              	<ul>  
-	              <%for(int i=1;i<travelRoute.size(); i++) {%>
-	            	   <li><p><%= travelRoute.get(i) %></p></li>
-	            	<%} %>
+	              <%for(int i=0;i<dateArray.length; i++) {
+	              		if( i == 0 && dateArray[i] == null){break;}else{ %>
+	            	   <li><p><%= dateArray[i] %></p></li>
+	            	<%} }%>
 	            	</ul> 
 	                </fieldset>
 	            </article>
@@ -125,7 +232,7 @@
             </article>
         </article>
     </article>
-	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 		
