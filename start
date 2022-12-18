@@ -13,6 +13,8 @@ MySQl 스키마 이름 : eco
         - 이메일 변수 : email (PrimaryKEY 설정 필요)
         - 닉네임 : nickname
         - 비밀번호 : pswd
+	- 찜 : bookmark
+	- 탄소 절약량 : cumulative
         
       여행 일정 테이블 : journey
         - 이메일 : email ( PrimaryKEY )  / 카카오톡인경우 회원 id값을 가져와서 적용시킴 (카카오톡은 회원정보 테이블 필요없음)
