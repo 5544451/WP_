@@ -48,17 +48,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
+ 	 <link rel="stylesheet" href="style2.css">
 	<script src="https://kit.fontawesome.com/f1def33959.js" crossorigin="anonymous"></script>
 	<link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="/css/style2.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<style>
-		fieldset{
-			padding : 30px;
-		}
-		 p { margin:20px 0px; }
-	</style>
-</head>
 <body>
 	<script>
 	function chkPwdForm(obj) {
@@ -147,8 +140,8 @@
 	     </article>
 	   </article>
 	</header>
-	<section class="container">
-      <article class="row">
+	<section class="mypage-container">
+      <article class="row" style="width=100%">
         <article class="col">
             <ul class="nav nav-tabs">
               <li class="nav-item">
@@ -163,14 +156,17 @@
             </ul>
             <article class="tab-content">
 	            <article class="tab-pane fade show active" id="info" style = "padding : 30px;">
-					<fieldset style="width : 50%; float:left;">
-						<p>닉네임</p>
-						<h4> <%= nickname %></h4>
-						<label style = "width :180px">새로운 닉네임</label><input type="text"  id="newNikname" >
-						<button style="float : right;" value = "수정하기" onclick = "editNickname()">수정하기</button>
+					<fieldset style="width : 50%; float:left; margin-top:4rem;">
+						<p>닉네임<span id="nickname"><%= nickname %></span></p>
+						<label style = "width :180px">새로운 닉네임</label>
+						<input type="text"  id="newNickname" >
+						<button value = "수정하기" onclick = "editNickname()">수정하기</button>
+						<p class="mypage-carbon">
+							<label>탄소 발자국</label><br><span> <%= culmulativeCarbon %> kg</span>
+						</p>
 					</fieldset>
-					<fieldset style="width : 50%; ">
-						<p>비밀번호 변경</p>
+					<fieldset style="width : 50%;">
+						<p style="color: #81a081">비밀번호 변경</p>
 						
 						<label style = "width :180px">현재 비밀번호</label>
 						<input type = "password" placeholder ="현재 비밀번호 입력"/>
@@ -178,16 +174,13 @@
 						<label style = "width :180px">새로운 비밀번호</label>
 						<input type = "password" id="pwd" name="pwd" placeholder ="공백없이 특수문자 포함" onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)"/>
 						<p id = "pwdResult"></p>
-						<span>보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p><span id = "pwdchkResult"></span>
+						<span>보안</span><br>
+						<progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p><span id = "pwdchkResult"></span>
 						
 						<label style = "width :180px">새로운 비밀번호 확인</label>
 						<input type = "password" id="pwd_chk" name="pwd_chk" placeholder ="공백없이 특수문자 포함" onkeyup="chkPwd(event)"/><br>
 						
-						<button style="float : right;" value = "변경하기" onclick="editPWD()">변경하기</button>
-					</fieldset>
-					<fieldset>
-						<label>탄소 발자국</label>
-						<h4> <%= culmulativeCarbon %> kg</h4>
+						<button value = "변경하기" onclick="editPWD()">변경하기</button>
 					</fieldset>
 	            </article>
 	            <article class="tab-pane fade" id="record" style = "padding : 30px;">
@@ -203,29 +196,27 @@
 	              	<ul>  
 	              <%for(int i=0;i<dateArray.length; i++) {
 	              		if( i == 0 && dateArray[i] == null){break;}else{ %>
-	            	   <li><p><%= dateArray[i] %></p></li>
+	            	   <li class="my-place-card"><%= dateArray[i] %></li>
 	            	<%} }%>
 	            	</ul> 
 	                </fieldset>
 	            </article>
-	            <article class="tab-pane fade" id="Withdrawal" style = "padding : 30px;">
-	                <fieldset style = "padding : 40px;">
-	                	<img src = "/img/저탄소여행.png" style = "width : 300px; padding : 30px; display: felx;"/>
-	                	<h2> 회원 탈퇴 전 확인해주세요 </h2>
+	            <article class="tab-pane fade" id="Withdrawal">
+	                <fieldset style = "padding : 20px;	width: 60%;" class="withdrawal-fieldset">
+	                	<img src = "저탄소여행.png" style = "width : 300px; padding : 30px; display: flex;"/>
+	                	<h2><i class="fa-solid fa-triangle-exclamation exclamation-style"></i>회원 탈퇴 전 확인해주세요 </h2>
 	                	<p>탈퇴하시면 이용 중인 모든 데이터가 폐쇄되며, 모든 데이터는 복구가 불가능합니다.</p>
 	                	
 	                	<article style = "width : 100%; padding : 50px; display : felx; background-color : #F0FFF0 ;">
-	                		<ul>
-	                			<li> - 카카오톡을 포함한 모든 로그인 정보가 삭제 됩니다.</li>
-	                			<li> - 이때까지 모두 계획했던 여행 일정이 사라집니다.</li>
-	                			<li> - 누적으로 추가되고 있던 탄소량이 초기화 됩니다.</li>
+	                		<ul style="list-style:none;">
+	                			<li style="margin: 0.4rem 0;"><i class="fa-solid fa-check check-style"></i> 카카오톡을 포함한 모든 로그인 정보가 삭제 됩니다.</li>
+	                			<li style="margin: 0.4rem 0;"><i class="fa-solid fa-check check-style"></i> 이때까지 모두 계획했던 여행 일정이 사라집니다.</li>
+	                			<li style="margin: 0.4rem 0;"><i class="fa-solid fa-check check-style"></i> 누적으로 추가되고 있던 탄소량이 초기화 됩니다.</li>
 	                		</ul>
 	                	</article>
 	                	
-	                	<input type="checkbox" id="cb1">안내사항을 모두 확인하였으며, 이에 동의합니다.</input>
-	                	<hr>
-	                	<input type = "submit" value = "탈퇴하기"/>
-	                	
+	                	<p class="out-checkbox"><input type="checkbox" id="cb1"/><span style="margin-left:1rem;">안내사항을 모두 확인하였으며, 이에 동의합니다.</span></p>
+	                	<input type = "submit" style="width:150px;" value = "탈퇴하기"/>
 	                </fieldset>
 	            </article>
 	            
@@ -235,7 +226,6 @@
     	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-		
 	</section>
 
 </body>
