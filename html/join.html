@@ -2,7 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
+	<link rel="icon" href="/img/leaf-solid.svg">
+
+  	<link rel="stylesheet" href="/css/main.css">
+ 	<link rel="stylesheet" href="/css/style2.css">  
+    <style>
+    	section { 
+    		height : 80% ;
+    		margin : 10px;
+    		}
+    	p {
+    		font-size : 10px;
+    	}
+    	
+    </style>
 </head>
 <body>
 	<script>
@@ -93,8 +107,6 @@
         		stringChk[3] = true;
             }
         }
-
-
         security =  stringChk.filter(element => true === element).length;
         document.getElementById("Security_Level").value = security;
         document.getElementById("secMessage").innerHTML = secuM[security-1];
@@ -144,54 +156,42 @@
 	
 	</script>
     <header>
-    	<h1>&nbsp;<a href="join.jsp"> 회원가입 </a></h1>
-    </header><hr>
-	<section class="popup">
-        <form onsubmit="alert('회원가입 완료!!');">
+    	<article class="head-container">
+      	<!--헤드 브랜드 클릭 시 새로고침-->
+      		<article class="brand-container">
+        		<i class="fa-solid fa-leaf brand-icon eco-style"></i>
+        		<article class="brand-name">ECO Travel  회원가입</article>
+        	</article>
+        </article>
+    </header>
+    <hr>
+	<section style = "width : 80%; margin : 0 auto;">
+        <form action ="signup" method = "POST">
             <fieldset>
             	<legend>회원 정보 입력</legend>
                 <ul>
+                    <li>
+                        <label for="mail"> 이메일 </label>
+                        <input type="email" id="mail" name="mail" required>
+                    </li>
                 	<li>
                 		<label for="nickname"> 닉네임 </label>
-                		<input type="text" id="nickname" autofocus placeholder="공백 불가능"  onblur="chkNickForm(this)" required/>
+                		<input type="text" id="nickname" name="nickname" autofocus placeholder="공백 불가능"  onblur="chkNickForm(this)" required/>
                 		<p id = "nickResult"></p>
                 	</li>
                     <li>
                         <label for="pwd"> 비밀번호 </label>
-                        <input type="password" id="pwd" placeholder="공백없이 특수문자 포함"  onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)" required/>
+                        <input type="password" id="pwd" name="pwd" placeholder="공백없이 특수문자 포함"  onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)" required/>
                         <p id = "pwdResult"></p>
-                        <br>
-                        <span style="margin-left : 120px;">보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p>
-                    	
+                        <span>보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p>
                     </li>
                     <li>
                         <label for="pwd_chk"> 비밀번호 확인 </label>
-                        <input type="password" id="pwd_chk"  onkeyup="chkPwd(event)" required/>
+                        <input type="password" id="pwd_chk" name="pwd_chk" onkeyup="chkPwd(event)" required/>
                     	<p id = "pwdchkResult"></p>
                     </li>
-                    <li>
-                        <label for="mail"> 이메일 </label>
-                        <input type="email" id="mail" required>
-                    </li>
-                    <li>
-                        <label for="mobile"> 전화번호 </label>
-                        <select name="phone" style = "width:70px; height:30px;">
-                            <option value="LG U+">LG U+</option>
-                            <option value="SK">SK</option>
-                            <option value="KT">KT</option>
-                        </select>
-                        <input type="tel" id= "su_phone" required>
-                    </li>
                 </ul>
-            </fieldset>
-            <fieldset>
-                <legend>이메일 수신 동의</legend>
-                <input type="radio" name="mailing" id="mailing_y" checked>
-                <label for="mailing_y">메일 수신 동의</label>
-                <input type="radio" name="mailing" id="mailing_n" >
-                <label for="mailing_n">메일 수신 동의하지 않음</label>
-            </fieldset>
-        
+            </fieldset>     
         <input type="submit" value="회원가입" id="buttons">
         <a href="home.jsp"><input type="button" value="돌아가기" id="buttons"> </a>
         </form>
