@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 	<link rel="icon" href="/img/leaf-solid.svg">
-
-  	<link rel="stylesheet" href="/css/main.css">
- 	<link rel="stylesheet" href="/css/style2.css">  
+ 	<link rel="stylesheet" href="style2.css">  
     <style>
     	section { 
     		height : 80% ;
@@ -155,46 +153,30 @@
 	}
 	
 	</script>
-    <header>
-    	<article class="head-container">
-      	<!--헤드 브랜드 클릭 시 새로고침-->
-      		<article class="brand-container">
-        		<i class="fa-solid fa-leaf brand-icon eco-style"></i>
-        		<article class="brand-name">ECO Travel  회원가입</article>
-        	</article>
-        </article>
-    </header>
-    <hr>
-	<section style = "width : 80%; margin : 0 auto;">
-        <form action ="signup" method = "POST">
-            <fieldset>
-            	<legend>회원 정보 입력</legend>
-                <ul>
-                    <li>
-                        <label for="mail"> 이메일 </label>
-                        <input type="email" id="mail" name="mail" required>
-                    </li>
-                	<li>
-                		<label for="nickname"> 닉네임 </label>
-                		<input type="text" id="nickname" name="nickname" autofocus placeholder="공백 불가능"  onblur="chkNickForm(this)" required/>
-                		<p id = "nickResult"></p>
-                	</li>
-                    <li>
-                        <label for="pwd"> 비밀번호 </label>
-                        <input type="password" id="pwd" name="pwd" placeholder="공백없이 특수문자 포함"  onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)" required/>
-                        <p id = "pwdResult"></p>
-                        <span>보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p>
-                    </li>
-                    <li>
-                        <label for="pwd_chk"> 비밀번호 확인 </label>
-                        <input type="password" id="pwd_chk" name="pwd_chk" onkeyup="chkPwd(event)" required/>
-                    	<p id = "pwdchkResult"></p>
-                    </li>
-                </ul>
-            </fieldset>     
-        <input type="submit" value="회원가입" id="buttons">
-        <a href="home.jsp"><input type="button" value="돌아가기" id="buttons"> </a>
-        </form>
-	</section>   
+	<section class="join-section">
+		<article class="join-article">
+			<h1 class="join-title">ECO Travel</h1>
+			<form action ="signup" method = "POST" class="join-form">
+				<label for="mail"> 이메일 </label>
+	            <input type="email" id="mail" name="mail" required>
+	            
+	            <label for="pwd" style="margin-top:20px;"> 비밀번호 </label>
+	            <input type="password" id="pwd" name="pwd" placeholder="공백없이 특수문자 포함"  onkeyup="chkSecurity(this)" onblur="chkPwdForm(this)" required/>
+	            <p id = "pwdResult"></p>
+	            <span>보안</span> <progress id = "Security_Level" value="0" max="4"></progress><p id="secMessage"></p>
+	            
+	            <label for="pwd_chk"> 비밀번호 확인 </label>
+	            <input type="password" id="pwd_chk" name="pwd_chk" onkeyup="chkPwd(event)" required/>
+	        	<p id = "pwdchkResult"></p>
+	        	
+	        	<label for="nickname"> 닉네임 </label>
+	       		<input type="text" id="nickname" name="nickname" autofocus placeholder="공백 불가능"  onblur="chkNickForm(this)" required/>
+	       		<p id = "nickResult"></p>
+	        	
+	        	<input type="submit" value="회원가입" id="buttons">
+			</form>
+		</article>
+	</section>
+       
 </body>
 </html>
