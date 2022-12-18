@@ -36,16 +36,21 @@ public class addJourney extends HttpServlet{
 		userJourney = (List<String>) session.getAttribute("travelRoute");
 		String contentCol = "";
 		
-		for(int i = 0; i < userJourney.size() ; i++) {
+		int i;
+		for(i = 0; i < userJourney.size() ; i++) {
 			System.out.println("userJourney.get(i) : " + userJourney.get(i));
 			if( userJourney.get(i) == "null" || userJourney.get(i).isEmpty())
 			{
 				contentCol = "plan" + (i);
 				break;
 			}
-			contentCol = "plan" + (userJourney.size());
 		}
 		
+		if(i == userJourney.size())
+		{
+			contentCol = "plan" + (i);
+			DBcon.addColumn(i);
+		}
 		
 		System.out.println("contentCol : " + contentCol);
 		DBcon.updateJourney(id, contentCol, newJourney);
