@@ -227,14 +227,17 @@ public class DBControll {
 	    }
 		
 		//조건에 맞는 회원 테이블 값을 DB에서 수정(갱신) 하는 메서드
-	    public void updateMember(String id) {
+	    public void updateMember(String[] mem) {
 	    	connect();
-	        String sql = "update member set nickname =?, password =?, where email=?";
+	        String sql = "update member set nickname =?, pswd =?, bookmark=?, cumulative=? where email=?";
 	        PreparedStatement pstmt = null;
 	        try {
 	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(2,"nickname");
-	            pstmt.setString(3,"pswd");
+	            pstmt.setString(1,mem[1]);
+	            pstmt.setString(2,mem[2]);
+	            pstmt.setString(3,mem[3]);
+	            pstmt.setString(4,mem[4]);
+	            pstmt.setString(5,mem[0]);
 	            int result = pstmt.executeUpdate();
 	            if(result == 1) {
 	                System.out.println("journey updateMember success!");
