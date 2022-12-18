@@ -42,7 +42,7 @@ header {
   width: 100%;
   height: 60px;
   position: fixed;
-  background-color: #F2F2F2;
+  background-color: #fff;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -55,7 +55,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.01px solid #B1B1B1;
 }
 
 /*사이트 이름 '에코 트레벨'을 감싸는 컨테이너*/
@@ -90,24 +89,25 @@ header {
   justify-content: space-between;
   align-items: center;
   font-size: 1rem;
+  margin-right: 1.2rem;
 }
 
 .account-login {
-  margin: 0 1rem;
+  margin: 0 0.8rem;
   text-align: center;
 }
 
-.account-login a:hover {
+.account-login:hover {
   cursor: pointer;
   color: #69A60D;
 }
 
 .account-join {
-  margin: 0 2rem 0 0;
+  margin: 0 0.8rem 0 0;
   text-align: center;
 }
 
-.account-join a:hover {
+.account-join:hover {
   cursor: pointer;
   color: #ABBF0F;
 }
@@ -117,7 +117,7 @@ section {
   width: 100%;
   height:100%;
   background-color: #fff;
-  position: relative;
+  position: fixed;
 }
 
 .map {
@@ -187,8 +187,6 @@ section {
   left: 0;
   width: 70px;
   height: 100vh;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
   overflow: hidden;
   white-space: nowrap;
   box-shadow: 0 0 20px #d4d4d4;
@@ -205,15 +203,26 @@ section {
   width: 300px;
 }
 
-.word, .form-control {
+.word {
   width: 250px;
-  height: 30px;
+  height: 35px;
   border: 0.1px solid #3f464d;
   border-radius: 15px;
   outline: none;
   padding-left: 10px;
   padding-right: 35px;
   font-size: 0.8rem;
+}
+
+.form-control {
+	width: 80%;
+	height: 35px;
+	border: 0.1px solid #3f464d;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 0.8rem;
 }
 
 /*검색 창*/
@@ -253,13 +262,26 @@ form {
 .side-title {
   text-align: center;
   font-size: 1rem;
-  margin: 0.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem; 
 }
+
 .btn-store{
+	bottom: 0;
+  width:80%;
   text-align: center;
   font-size: 1rem;
-  margin: 0.8rem;
-  width:100%
+  margin-top: 1.4rem;
+  margin-bottom: 1.8rem;
+  height: 40px;
+  color: white;
+  background-color: #81a081;
+  border-radius: 15px;
+  border: none;
+}
+
+.btn-store:hover {
+	cursor: pointer;
 }
 
 /*선택 제목*/
@@ -283,7 +305,38 @@ form {
 .list-container::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
+
+.placelist-container {
+	position: fixed;
+	top: 60px;
+	right: 0;
+	width: 250px;
+	height: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	box-shadow: 0 0 20px #d4d4d4;
+	padding-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #fff;
+	z-index: 100;
+}
+
+#datepick {
+	width: 80%;
+	height: 35px;
+	border: 0.1px solid #3f464d;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 0.8rem;
+}
+
 .plist-container {
+	width: 80%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -292,7 +345,6 @@ form {
   margin: 0;
   overflow: hidden; 
   overflow-y: scroll;
-  height: 500px;
 }
 .plist-container::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
@@ -432,37 +484,120 @@ form {
   color: #BFBFBF;
 }
 
-.placelist-container {
-  position: fixed;
-  top: 60px;
-  right: 0;
-  width: 250px;
-  height: 100vh;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  overflow: hidden;
-  white-space: nowrap;
-  box-shadow: 0 0 20px #d4d4d4;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  z-index: 100;
-  transition: .3s ease;
-  
+/*--인포 윈도우--*/
+.wrap-style {
+	border: none;
 }
 
+.wrap-style :not(div) {
+	border:none;
+}
+
+.info {
+	width: 200px;
+	height: 150px;
+	border: none;
+	border-radius:15px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.close {
+	width:50px;
+	text-align: center;
+	font-size: 0.7rem;
+	margin: 0.5rem;
+	margin-right: 1.2rem;
+	height: 20px;
+	color: white;
+	background-color: #81a081;
+	border-radius: 15px;
+	border: none;
+}
+
+.add {
+	width:50px;
+	text-align: center;
+	font-size: 0.7rem;
+	margin: 0.5rem;
+	margin-left: 1.2rem;
+	height: 20px;
+	color: white;
+	background-color: #81a081;
+	border-radius: 15px;
+	border: none;
+}
+
+.title {
+	margin: 0.7rem 0;
+}
+
+.phone-icon {
+	margin-right: 0.4rem;
+	font-size: 0.7rem;
+}
+
+.ellipsis {
+	font-size: 0.8rem;
+	margin: 0.5rem 0;
+}
+
+.jibun ellipsis {
+	font-size: 0.8rem;
+	margin: 0.5rem 0;
+}
+
+.my-place-card {
+	  width: 100%;
+	  height: 110px;
+	  margin: 0.8rem;
+	  padding: 0.3rem;
+	  border: 1px solid #D9D9D9;
+	  border-radius: 8px;
+}
+
+.my-place-name {
+	font-size: 0.9rem;
+	margin: 0.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.my-place-address {
+	font-size: 0.8rem;
+	margin: 0.7rem;
+}
+
+.del-data, .up-data, .down-data {
+	width:50px;
+	text-align: center;
+	font-size: 0.7rem;
+	margin: 0.4rem;
+	margin-top: 0.3rem;
+	height: 20px;
+	color: white;
+	background-color: #81a081;
+	border-radius: 15px;
+	border: none;
+}
+
+
 .overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 900;
+          position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        visibility:hidden;
+
+        background-color: rgba(0, 0, 0, 0.4);
+       z-index: 1000;
 }
 
 .overlay:target {
@@ -612,10 +747,77 @@ input[type=submit]:hover {
   width: 80px;
 }
 
-/* 드롭다운 메뉴 스타일 */
-select{
-    width: 100px;
-    height: 30px;
+
+/*회원가입*/
+.join-section {
+	top:0px;
+	width:100%;
+	height:100%;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden; 
+	overflow-y: scroll;
+}
+
+.join-article {
+   position: absolute;
+	top: -60px;
+	width: 500px;
+	margin:0.7rem;
+}
+
+.join-title {
+	text-align:center;
+	color: #81a081;
+	font-weight: bold;
+	font-size: 4rem;
+	margin-bottom: 1.3rem;
+}
+
+.join-form {
+	width:100%;
+	display: flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.join-form input {
+	width: 100%;
+	height: 50px;
+	border: 0.1px solid #81a081;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 1.2rem;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	margin: 0.5rem 0;
+}
+
+.join-form label, .join-form span {
+	width:100%;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 1.2rem;
+	font-weight:bold;
+	color:#9a9e9a;
+}
+
+.join-form progress {
+	width: 100%;
+	height: 40px;
+	color: #81a081;
+}
+
+.join-form p {
+	font-size: 1.2rem;
 }
 
 /* 표만드는 테두리 */
@@ -661,17 +863,17 @@ td, th{
 .dropdown:hover .dropdown-content {display: block;}
 
 .carbon-modal {
-	position: absolute;
-	top: 0;
-	left: 0;
-	
-	width: 100%;
-	height: 100%;
-	
-	visibility:hidden;
-	
-	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 1000;
+   position: absolute;
+   top: 0;
+   left: 0;
+   
+   width: 100%;
+   height: 100%;
+   
+   visibility:hidden;
+   
+   background-color: rgba(0, 0, 0, 0.4);
+   z-index: 1000;
 }
 
 .carbon-modal.show {
@@ -679,72 +881,72 @@ td, th{
 }
 
 .carbon-modal-body {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	
-	width: 350px;
-	height: 450px;
-	
-	padding: 30px;
-	
-	text-align: center;
-	
-	background-color: rgb(255, 255, 255);
-	border-radius: 10px;
-	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-	
-	transform: translateX(-50%) translateY(-50%);
-	
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   
+   width: 350px;
+   height: 450px;
+   
+   padding: 30px;
+   
+   text-align: center;
+   
+   background-color: rgb(255, 255, 255);
+   border-radius: 10px;
+   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+   
+   transform: translateX(-50%) translateY(-50%);
+   
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
 
 .carbon-trees-body {
-	width: 95%;
-	height: 50%;
-	background-color: rgb(255, 255, 255);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 1.6rem;
+   width: 95%;
+   height: 50%;
+   background-color: rgb(255, 255, 255);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 1.6rem;
 }
 
 .one-tree {
-	font-size: 6rem;
-	color: green;
-	padding: 0.5rem;
+   font-size: 6rem;
+   color: green;
+   padding: 0.5rem;
 }
 
 .tree-style {
-	font-size: 3rem;
-	color: green;
-	padding: 0.5rem;
+   font-size: 3rem;
+   color: green;
+   padding: 0.5rem;
 }
 
 .carbon-message-body {
-	width: 95%;
-	height: 40%;
-	background-color: #EFF5EF;
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-family: 'Nanum Gothic', sans-serif;
-	line-height: 40px;
-	padding: 20px;
-	font-size: 1.2rem;
+   width: 95%;
+   height: 40%;
+   background-color: #EFF5EF;
+   border-radius: 10px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   font-family: 'Nanum Gothic', sans-serif;
+   line-height: 40px;
+   padding: 20px;
+   font-size: 1.2rem;
 }
 
 .message-carbon {
-	font-weight: bold;
-	font-size: 1.8rem;
-	font-family: 'Black Han Sans', sans-serif;
-	padding: 0.6rem;
+   font-weight: bold;
+   font-size: 1.8rem;
+   font-family: 'Black Han Sans', sans-serif;
+   padding: 0.6rem;
 }
 
 .carbon-kakaoshare {
