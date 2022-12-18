@@ -25,10 +25,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic&family=Noto+Sans+KR:wght@300;700&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
   <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
   
-  <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="modal.css">
   <link rel="stylesheet" href="style2.css">
-  
+  <link rel="stylesheet" href="modal.css">
   <script src="https://kit.fontawesome.com/bb81250f29.js" crossorigin="anonymous"></script>
   <!-- 날짜 선택 -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -41,8 +39,29 @@
   <title>ECO Travel</title>
 </head>
 <body>
+   <!-- 로그인 모달 창 -->
+   <article id="login" class="overlay">
+      <!--팝업창-->
+      <article class="popup">
+         <!--'로그인' 타이틀-->
+         <p class="title">로그인</p>
+         <!--아이디 비밀번호 입력, 로그인 버튼-->
+         <form action="login_ajax.jsp" method="post" style="width: 100%;">
+            <i class="fa-solid fa-user id-icon"></i>
+            <input type="text" name="user-id" class="input-id" autofocus placeholder="아이디" required/>
+            <i class="fa-solid fa-lock pwd-icon"></i>
+            <input type="password" name="user-pwd" class="input-pwd" placeholder="비밀번호" required/>
+            <input type="submit" value="로그인"/>
+         </form>
+         <!--회원가입으로 이동-->
+         <p class="to-join">아이디가 없으신가요?<a href="join.html" class="move-to-join">회원가입</a></p>
+         <!--카카오 로그인으로 이동-->
+         <p class="to-sns-login">SNS 계정으로 로그인</p>
+         <a onclick="javascript:loginWithKakao()"><img src="kakao_login_large.png" class="kakao-login" alt="카카오 로그인 버튼"/></a>    
+      </article> 
+   </article>
   <!--모달창 배경이 될 부분-->
-	<article class="carbon-modal">
+   <article class="carbon-modal">
       <!--모달창-->
       <article class="carbon-modal-body">
         <!--나무 아이콘 나타내는 부분-->
@@ -88,7 +107,7 @@
     </ul>
   </article>
 
-	
+   
   <article class="destination-container">
     <article class="destination-bar">
       <button class="destination-box" id="veget-food">
@@ -110,23 +129,18 @@
     </article>
   </article>
   
-	<article class="placelist-container">
-		<article>
-        	<input type='text' class="form-control linkedCalendars" placeholder="날짜 선택"/>
-    	</article>
-    	<article class="side-title">
-    		<p>날짜 선택</p> 
-    		<select name="language" id="datepick" onchange="handleOnChange(this)">	
-			</select>
-		</article>
-    	<ul class="plist-container">
-    	</ul>
-    	<button class="btn-store">일정 저장</button>
- 	</article>
- 	<!-- 지도 전체 화면 -->
-	<section  id="map" class="map">
-   		<!-- 지도 부분 따로 추가하는 부분 -->
- 		<jsp:include page="search.jsp" flush="false" />		
-  	</section>
+   <article class="placelist-container">
+      <input type='text' class="form-control linkedCalendars" placeholder="날짜 선택"/>
+       <p class="side-title">날짜 선택</p> 
+       <select name="language" id="datepick" onchange="handleOnChange(this)"></select>
+       <ul class="plist-container">
+       </ul>
+       <button class="btn-store">일정 저장</button>
+    </article>
+    <!-- 지도 전체 화면 -->
+   <section id="map" class="map">
+         <!-- 지도 부분 따로 추가하는 부분 -->
+       <jsp:include page="search.jsp" flush="false" />      
+   </section>
 </body>
 </html>
